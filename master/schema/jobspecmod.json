@@ -13343,8 +13343,8 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "host", 
-          "to"
+          "to", 
+          "host"
         ], 
         "properties": {
           "uid": {
