@@ -7565,9 +7565,9 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "triggers", 
           "strategy", 
-          "nodeSelector"
+          "nodeSelector", 
+          "triggers"
         ], 
         "description": "BuildConfigSpecMod defines OpenShift BuildConfig object", 
         "properties": {
