@@ -10711,11 +10711,11 @@
     "io.kedge.DeploymentConfigSpecMod": {
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig in order to define and allow a complete kedge app based on OpenShift",
       "required": [
+        "test",
         "containers",
         "strategy",
         "triggers",
-        "replicas",
-        "test"
+        "replicas"
       ],
       "properties": {
         "activeDeadlineSeconds": {
@@ -12272,9 +12272,6 @@
     },
     "io.kedge.VolumeClaim": {
       "description": "VolumeClaim is used to define Persistent Volumes for app",
-      "required": [
-        "size"
-      ],
       "properties": {
         "accessModes": {
           "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",

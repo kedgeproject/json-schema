@@ -9,9 +9,6 @@
     "volumeClaims": {
       "items": {
         "additionalProperties": false, 
-        "required": [
-          "size"
-        ], 
         "description": "VolumeClaim is used to define Persistent Volumes for app", 
         "properties": {
           "uid": {
@@ -63,7 +60,10 @@
             "format": "date-time"
           }, 
           "size": {
-            "type": "string", 
+            "type": [
+              "string", 
+              "null"
+            ], 
             "description": "Size of persistent volume"
           }, 
           "namespace": {
