@@ -10341,9 +10341,9 @@
     "io.kedge.BuildConfigSpec": {
       "description": "BuildConfigSpecMod defines OpenShift BuildConfig object",
       "required": [
+        "triggers",
         "strategy",
-        "nodeSelector",
-        "triggers"
+        "nodeSelector"
       ],
       "properties": {
         "annotations": {
