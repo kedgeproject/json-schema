@@ -11067,8 +11067,8 @@
     }, 
     "io.kedge.RouteSpec": {
       "required": [
-        "host", 
-        "to"
+        "to", 
+        "host"
       ], 
       "properties": {
         "tls": {
@@ -16554,11 +16554,11 @@
     }, 
     "io.kedge.DeploymentConfigSpecMod": {
       "required": [
-        "test", 
         "containers", 
         "strategy", 
         "triggers", 
-        "replicas"
+        "replicas", 
+        "test"
       ], 
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig in order to define and allow a complete kedge app based on OpenShift", 
       "properties": {
@@ -18656,9 +18656,9 @@
     }, 
     "io.kedge.BuildConfigSpec": {
       "required": [
-        "nodeSelector", 
         "triggers", 
-        "strategy"
+        "strategy", 
+        "nodeSelector"
       ], 
       "description": "BuildConfigSpecMod defines OpenShift BuildConfig object", 
       "properties": {
