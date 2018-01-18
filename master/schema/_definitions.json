@@ -3435,25 +3435,11 @@
       "required": [
         "containers"
       ], 
-      "description": "DeploymentSpecMod is Kedge's extension of Kubernetes DeploymentSpec and allows defining a complete kedge application", 
+      "description": "DeploymentSpecMod is Kedge's extension of Kubernetes DeploymentSpec", 
       "properties": {
-        "volumeClaims": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.VolumeClaim"
-          }, 
-          "type": "array", 
-          "description": "List of volume that should be mounted on the pod."
-        }, 
         "dnsPolicy": {
           "type": "string", 
           "description": "Set DNS policy for containers within the pod. One of 'ClusterFirstWithHostNet', 'ClusterFirst' or 'Default'. Defaults to \"ClusterFirst\". To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'."
-        }, 
-        "ingresses": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.IngressSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Ingress"
         }, 
         "uid": {
           "type": "string", 
@@ -3473,22 +3459,16 @@
           "description": "Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.", 
           "format": "int64"
         }, 
-        "hostNetwork": {
-          "type": "boolean", 
-          "description": "Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Default to false."
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          }, 
+          "type": "object", 
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
         }, 
         "paused": {
           "type": "boolean", 
           "description": "Indicates that the deployment is paused."
-        }, 
-        "ownerReferences": {
-          "items": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
-          }, 
-          "x-kubernetes-patch-merge-key": "uid", 
-          "type": "array", 
-          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
-          "x-kubernetes-patch-strategy": "merge"
         }, 
         "restartPolicy": {
           "type": "string", 
@@ -3517,10 +3497,6 @@
           "type": "integer", 
           "description": "Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)", 
           "format": "int32"
-        }, 
-        "includeResources": {
-          "type": "array", 
-          "description": "List of Kubernetes resource files, that can be directly given to Kubernetes"
         }, 
         "securityContext": {
           "description": "SecurityContext holds pod-level security attributes and common container settings. Optional: Defaults to empty.  See type description for default values of each field.", 
@@ -3598,19 +3574,9 @@
           "type": "boolean", 
           "description": "Use the host's pid namespace. Optional: Default to false."
         }, 
-        "configMaps": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ConfigMap"
-          }, 
-          "type": "array", 
-          "description": "List of configMaps"
-        }, 
-        "labels": {
-          "additionalProperties": {
-            "type": "string"
-          }, 
-          "type": "object", 
-          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
+        "hostNetwork": {
+          "type": "boolean", 
+          "description": "Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Default to false."
         }, 
         "serviceAccountName": {
           "type": "string", 
@@ -3625,46 +3591,27 @@
           "type": "string", 
           "description": "The name of the cluster which the object belongs to. This is used to distinguish resources with same name and namespace in different clusters. This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request."
         }, 
-        "appversion": {
-          "type": "string", 
-          "description": "Field to specify the version of application"
-        }, 
         "selector": {
           "description": "Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this deployment.", 
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
-        }, 
-        "controller": {
-          "type": "string"
         }, 
         "hostIPC": {
           "type": "boolean", 
           "description": "Use the host's ipc namespace. Optional: Default to false."
         }, 
-        "services": {
+        "ownerReferences": {
           "items": {
-            "$ref": "#/definitions/io.kedge.ServiceSpec"
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
           }, 
+          "x-kubernetes-patch-merge-key": "uid", 
           "type": "array", 
-          "description": "List of Kubernetes Services"
+          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
+          "x-kubernetes-patch-strategy": "merge"
         }, 
         "progressDeadlineSeconds": {
           "type": "integer", 
           "description": "The maximum time in seconds for a deployment to make progress before it is considered to be failed. The deployment controller will continue to process failed deployments and a condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status. Once autoRollback is implemented, the deployment controller will automatically rollback failed deployments. Note that progress will not be estimated during the time a deployment is paused. Defaults to 600s.", 
           "format": "int32"
-        }, 
-        "buildConfigs": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.BuildConfigSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift BuildConfigs"
-        }, 
-        "imageStreams": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ImageStreamSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift ImageStreams"
         }, 
         "name": {
           "type": "string", 
@@ -3677,13 +3624,6 @@
         "deletionTimestamp": {
           "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata", 
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
-        }, 
-        "secrets": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.SecretSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Secrets"
         }, 
         "containers": {
           "items": {
@@ -3718,13 +3658,6 @@
           "type": "array", 
           "description": "List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes", 
           "x-kubernetes-patch-strategy": "merge"
-        }, 
-        "routes": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.RouteSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift Routes"
         }, 
         "initContainers": {
           "items": {
@@ -10097,25 +10030,11 @@
       "required": [
         "containers"
       ], 
-      "description": "JobSpecMod is Kedge's extension of Kubernetes JobSpec and allows defining a complete kedge application", 
+      "description": "JobSpecMod is Kedge's extension of Kubernetes JobSpec", 
       "properties": {
-        "volumeClaims": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.VolumeClaim"
-          }, 
-          "type": "array", 
-          "description": "List of volume that should be mounted on the pod."
-        }, 
         "dnsPolicy": {
           "type": "string", 
           "description": "Set DNS policy for containers within the pod. One of 'ClusterFirstWithHostNet', 'ClusterFirst' or 'Default'. Defaults to \"ClusterFirst\". To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'."
-        }, 
-        "ingresses": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.IngressSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Ingress"
         }, 
         "uid": {
           "type": "string", 
@@ -10143,15 +10062,6 @@
         "hostNetwork": {
           "type": "boolean", 
           "description": "Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Default to false."
-        }, 
-        "ownerReferences": {
-          "items": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
-          }, 
-          "x-kubernetes-patch-merge-key": "uid", 
-          "type": "array", 
-          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
-          "x-kubernetes-patch-strategy": "merge"
         }, 
         "restartPolicy": {
           "type": "string", 
@@ -10243,13 +10153,6 @@
           "type": "boolean", 
           "description": "Use the host's pid namespace. Optional: Default to false."
         }, 
-        "configMaps": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ConfigMap"
-          }, 
-          "type": "array", 
-          "description": "List of configMaps"
-        }, 
         "labels": {
           "additionalProperties": {
             "type": "string"
@@ -10269,45 +10172,22 @@
           "type": "string", 
           "description": "The name of the cluster which the object belongs to. This is used to distinguish resources with same name and namespace in different clusters. This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request."
         }, 
-        "appversion": {
-          "type": "string", 
-          "description": "Field to specify the version of application"
-        }, 
         "selector": {
           "description": "A label query over pods that should match the pod count. Normally, the system sets this field for you. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors", 
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector"
-        }, 
-        "controller": {
-          "type": "string"
         }, 
         "hostIPC": {
           "type": "boolean", 
           "description": "Use the host's ipc namespace. Optional: Default to false."
         }, 
-        "services": {
+        "ownerReferences": {
           "items": {
-            "$ref": "#/definitions/io.kedge.ServiceSpec"
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
           }, 
+          "x-kubernetes-patch-merge-key": "uid", 
           "type": "array", 
-          "description": "List of Kubernetes Services"
-        }, 
-        "includeResources": {
-          "type": "array", 
-          "description": "List of Kubernetes resource files, that can be directly given to Kubernetes"
-        }, 
-        "buildConfigs": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.BuildConfigSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift BuildConfigs"
-        }, 
-        "imageStreams": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ImageStreamSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift ImageStreams"
+          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
+          "x-kubernetes-patch-strategy": "merge"
         }, 
         "name": {
           "type": "string", 
@@ -10320,13 +10200,6 @@
         "deletionTimestamp": {
           "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata", 
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
-        }, 
-        "secrets": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.SecretSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Secrets"
         }, 
         "containers": {
           "items": {
@@ -10362,13 +10235,6 @@
           "type": "array", 
           "description": "List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes", 
           "x-kubernetes-patch-strategy": "merge"
-        }, 
-        "routes": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.RouteSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift Routes"
         }, 
         "initContainers": {
           "items": {
@@ -15352,6 +15218,174 @@
         }
       }
     }, 
+    "io.kedge.App": {
+      "description": "Main kedge file structure defining whole applicatoin", 
+      "properties": {
+        "volumeClaims": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.VolumeClaim"
+          }, 
+          "type": "array", 
+          "description": "List of volume that should be mounted on the pod."
+        }, 
+        "ingresses": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.IngressSpec"
+          }, 
+          "type": "array", 
+          "description": "List of Kubernetes Ingress"
+        }, 
+        "uid": {
+          "type": "string", 
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids"
+        }, 
+        "configMaps": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.ConfigMap"
+          }, 
+          "type": "array", 
+          "description": "List of configMaps"
+        }, 
+        "generation": {
+          "type": "integer", 
+          "description": "A sequence number representing a specific generation of the desired state. Populated by the system. Read-only.", 
+          "format": "int64"
+        }, 
+        "deletionGracePeriodSeconds": {
+          "type": "integer", 
+          "description": "Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.", 
+          "format": "int64"
+        }, 
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          }, 
+          "type": "object", 
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
+        }, 
+        "clusterName": {
+          "type": "string", 
+          "description": "The name of the cluster which the object belongs to. This is used to distinguish resources with same name and namespace in different clusters. This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request."
+        }, 
+        "appversion": {
+          "type": "string", 
+          "description": "Field to specify the version of application"
+        }, 
+        "generateName": {
+          "type": "string", 
+          "description": "GenerateName is an optional prefix, used by the server, to generate a unique name ONLY IF the Name field has not been provided. If this field is used, the name returned to the client will be different than the name passed. This value will also be combined with a unique suffix. The provided value has the same validation rules as the Name field, and may be truncated by the length of the suffix required to make the value unique on the server.\n\nIf this field is specified and the generated name exists, the server will NOT return a 409 - instead, it will either return 201 Created or 500 with Reason ServerTimeout indicating a unique name could not be found in the time allotted, and the client should retry (optionally after the time indicated in the Retry-After header).\n\nApplied only if Name is not specified. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#idempotency"
+        }, 
+        "deploymentConfigs": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.DeploymentConfigSpecMod"
+          }, 
+          "type": "array"
+        }, 
+        "services": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.ServiceSpec"
+          }, 
+          "type": "array", 
+          "description": "List of Kubernetes Services"
+        }, 
+        "jobs": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.JobSpecMod"
+          }, 
+          "type": "array"
+        }, 
+        "includeResources": {
+          "type": "array", 
+          "description": "List of Kubernetes resource files, that can be directly given to Kubernetes"
+        }, 
+        "creationTimestamp": {
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata", 
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        }, 
+        "ownerReferences": {
+          "items": {
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
+          }, 
+          "x-kubernetes-patch-merge-key": "uid", 
+          "type": "array", 
+          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
+          "x-kubernetes-patch-strategy": "merge"
+        }, 
+        "buildConfigs": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.BuildConfigSpec"
+          }, 
+          "type": "array", 
+          "description": "List of OpenShift BuildConfigs"
+        }, 
+        "imageStreams": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.ImageStreamSpec"
+          }, 
+          "type": "array", 
+          "description": "List of OpenShift ImageStreams"
+        }, 
+        "name": {
+          "type": "string", 
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names"
+        }, 
+        "deletionTimestamp": {
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata", 
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
+        }, 
+        "secrets": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.SecretSpec"
+          }, 
+          "type": "array", 
+          "description": "List of Kubernetes Secrets"
+        }, 
+        "namespace": {
+          "type": "string", 
+          "description": "Namespace defines the space within each name must be unique. An empty namespace is equivalent to the \"default\" namespace, but \"default\" is the canonical representation. Not all objects are required to be scoped to a namespace - the value of this field for those objects will be empty.\n\nMust be a DNS_LABEL. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/namespaces"
+        }, 
+        "deployments": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.DeploymentSpecMod"
+          }, 
+          "type": "array"
+        }, 
+        "finalizers": {
+          "items": {
+            "type": "string"
+          }, 
+          "type": "array", 
+          "description": "Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.", 
+          "x-kubernetes-patch-strategy": "merge"
+        }, 
+        "initializers": {
+          "description": "An initializer is a controller which enforces some system invariant at object creation time. This field is a list of initializers that have not yet acted on this object. If nil or empty, this object has been completely initialized. Otherwise, the object is considered uninitialized and is hidden (in list/watch and get calls) from clients that haven't explicitly asked to observe uninitialized objects.\n\nWhen an object is created, the system will populate this list with the current set of initializers. Only privileged users may set or modify this list. Once it is empty, it may not be modified further by any user.", 
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Initializers"
+        }, 
+        "resourceVersion": {
+          "type": "string", 
+          "description": "An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources.\n\nPopulated by the system. Read-only. Value must be treated as opaque by clients and . More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency"
+        }, 
+        "routes": {
+          "items": {
+            "$ref": "#/definitions/io.kedge.RouteSpec"
+          }, 
+          "type": "array", 
+          "description": "List of OpenShift Routes"
+        }, 
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          }, 
+          "type": "object", 
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations"
+        }, 
+        "selfLink": {
+          "type": "string", 
+          "description": "SelfLink is a URL representing this object. Populated by the system. Read-only."
+        }
+      }
+    }, 
     "v1.DownwardAPIProjection": {
       "description": "Represents downward API info for projecting into a projected volume. Note that this is identical to a downwardAPI volume source without the default mode.", 
       "properties": {
@@ -16554,31 +16588,17 @@
     }, 
     "io.kedge.DeploymentConfigSpecMod": {
       "required": [
-        "containers", 
         "strategy", 
         "triggers", 
         "replicas", 
-        "test"
+        "test", 
+        "containers"
       ], 
-      "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig in order to define and allow a complete kedge app based on OpenShift", 
+      "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
       "properties": {
-        "volumeClaims": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.VolumeClaim"
-          }, 
-          "type": "array", 
-          "description": "List of volume that should be mounted on the pod."
-        }, 
         "dnsPolicy": {
           "type": "string", 
           "description": "Set DNS policy for containers within the pod. One of 'ClusterFirstWithHostNet', 'ClusterFirst' or 'Default'. Defaults to \"ClusterFirst\". To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'."
-        }, 
-        "ingresses": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.IngressSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Ingress"
         }, 
         "uid": {
           "type": "string", 
@@ -16598,22 +16618,16 @@
           "description": "Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.", 
           "format": "int64"
         }, 
-        "hostNetwork": {
-          "type": "boolean", 
-          "description": "Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Default to false."
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          }, 
+          "type": "object", 
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
         }, 
         "paused": {
           "type": "boolean", 
           "description": "Paused indicates that the deployment config is paused resulting in no new deployments on template changes or changes in the template caused by other triggers."
-        }, 
-        "ownerReferences": {
-          "items": {
-            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
-          }, 
-          "x-kubernetes-patch-merge-key": "uid", 
-          "type": "array", 
-          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
-          "x-kubernetes-patch-strategy": "merge"
         }, 
         "restartPolicy": {
           "type": "string", 
@@ -16723,19 +16737,9 @@
           "type": "boolean", 
           "description": "Use the host's pid namespace. Optional: Default to false."
         }, 
-        "configMaps": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ConfigMap"
-          }, 
-          "type": "array", 
-          "description": "List of configMaps"
-        }, 
-        "labels": {
-          "additionalProperties": {
-            "type": "string"
-          }, 
-          "type": "object", 
-          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels"
+        "hostNetwork": {
+          "type": "boolean", 
+          "description": "Host networking requested for this pod. Use the host's network namespace. If this option is set, the ports that will be used must be specified. Default to false."
         }, 
         "serviceAccountName": {
           "type": "string", 
@@ -16750,45 +16754,22 @@
           "type": "string", 
           "description": "The name of the cluster which the object belongs to. This is used to distinguish resources with same name and namespace in different clusters. This field is not set anywhere right now and apiserver is going to ignore it if set in create or update request."
         }, 
-        "appversion": {
-          "type": "string", 
-          "description": "Field to specify the version of application"
-        }, 
         "selector": {
           "type": "object", 
           "description": "Selector is a label query over pods that should match the Replicas count."
-        }, 
-        "controller": {
-          "type": "string"
         }, 
         "hostIPC": {
           "type": "boolean", 
           "description": "Use the host's ipc namespace. Optional: Default to false."
         }, 
-        "services": {
+        "ownerReferences": {
           "items": {
-            "$ref": "#/definitions/io.kedge.ServiceSpec"
+            "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.OwnerReference"
           }, 
+          "x-kubernetes-patch-merge-key": "uid", 
           "type": "array", 
-          "description": "List of Kubernetes Services"
-        }, 
-        "includeResources": {
-          "type": "array", 
-          "description": "List of Kubernetes resource files, that can be directly given to Kubernetes"
-        }, 
-        "buildConfigs": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.BuildConfigSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift BuildConfigs"
-        }, 
-        "imageStreams": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.ImageStreamSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift ImageStreams"
+          "description": "List of objects depended by this object. If ALL objects in the list have been deleted, this object will be garbage collected. If this object is managed by a controller, then an entry in this list will point to this controller, with the controller field set to true. There cannot be more than one managing controller.", 
+          "x-kubernetes-patch-strategy": "merge"
         }, 
         "name": {
           "type": "string", 
@@ -16801,13 +16782,6 @@
         "deletionTimestamp": {
           "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field. Once set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata", 
           "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Time"
-        }, 
-        "secrets": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.SecretSpec"
-          }, 
-          "type": "array", 
-          "description": "List of Kubernetes Secrets"
         }, 
         "triggers": {
           "items": {
@@ -16845,13 +16819,6 @@
           "type": "array", 
           "description": "List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes", 
           "x-kubernetes-patch-strategy": "merge"
-        }, 
-        "routes": {
-          "items": {
-            "$ref": "#/definitions/io.kedge.RouteSpec"
-          }, 
-          "type": "array", 
-          "description": "List of OpenShift Routes"
         }, 
         "initContainers": {
           "items": {
