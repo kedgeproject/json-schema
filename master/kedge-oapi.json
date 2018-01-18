@@ -10509,9 +10509,9 @@
     "io.kedge.BuildConfigSpec": {
       "description": "BuildConfigSpecMod defines OpenShift BuildConfig object",
       "required": [
-        "nodeSelector",
         "triggers",
-        "strategy"
+        "strategy",
+        "nodeSelector"
       ],
       "properties": {
         "annotations": {
@@ -10879,11 +10879,11 @@
     "io.kedge.DeploymentConfigSpecMod": {
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig",
       "required": [
+        "replicas",
         "test",
         "containers",
         "strategy",
-        "triggers",
-        "replicas"
+        "triggers"
       ],
       "properties": {
         "activeDeadlineSeconds": {
