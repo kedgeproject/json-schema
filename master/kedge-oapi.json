@@ -11821,8 +11821,8 @@
     },
     "io.kedge.RouteSpec": {
       "required": [
-        "to",
-        "host"
+        "host",
+        "to"
       ],
       "properties": {
         "alternateBackends": {
