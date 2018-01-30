@@ -20823,11 +20823,11 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "containers", 
-          "strategy", 
           "triggers", 
           "replicas", 
-          "test"
+          "test", 
+          "containers", 
+          "strategy"
         ], 
         "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
         "properties": {

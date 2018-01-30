@@ -10879,11 +10879,11 @@
     "io.kedge.DeploymentConfigSpecMod": {
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig",
       "required": [
-        "containers",
-        "strategy",
         "triggers",
         "replicas",
-        "test"
+        "test",
+        "containers",
+        "strategy"
       ],
       "properties": {
         "activeDeadlineSeconds": {
