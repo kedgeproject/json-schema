@@ -10933,8 +10933,8 @@
     }, 
     "io.kedge.RouteSpec": {
       "required": [
-        "host", 
-        "to"
+        "to", 
+        "host"
       ], 
       "properties": {
         "tls": {
@@ -15219,7 +15219,7 @@
       }
     }, 
     "io.kedge.App": {
-      "description": "Main kedge file structure defining whole applicatoin", 
+      "description": "Main kedge file structure defining whole application", 
       "properties": {
         "volumeClaims": {
           "items": {
@@ -16588,11 +16588,11 @@
     }, 
     "io.kedge.DeploymentConfigSpecMod": {
       "required": [
-        "triggers", 
         "replicas", 
         "test", 
         "containers", 
-        "strategy"
+        "strategy", 
+        "triggers"
       ], 
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
       "properties": {

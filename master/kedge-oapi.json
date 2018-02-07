@@ -10339,7 +10339,7 @@
       ]
     },
     "io.kedge.App": {
-      "description": "Main kedge file structure defining whole applicatoin",
+      "description": "Main kedge file structure defining whole application",
       "properties": {
         "annotations": {
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
@@ -10879,11 +10879,11 @@
     "io.kedge.DeploymentConfigSpecMod": {
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig",
       "required": [
-        "triggers",
         "replicas",
         "test",
         "containers",
-        "strategy"
+        "strategy",
+        "triggers"
       ],
       "properties": {
         "activeDeadlineSeconds": {
@@ -11821,8 +11821,8 @@
     },
     "io.kedge.RouteSpec": {
       "required": [
-        "host",
-        "to"
+        "to",
+        "host"
       ],
       "properties": {
         "alternateBackends": {

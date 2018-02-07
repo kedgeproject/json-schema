@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema#", 
   "type": "object", 
-  "description": "Main kedge file structure defining whole applicatoin", 
+  "description": "Main kedge file structure defining whole application", 
   "properties": {
     "volumeClaims": {
       "items": {
@@ -20823,11 +20823,11 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "triggers", 
           "replicas", 
           "test", 
           "containers", 
-          "strategy"
+          "strategy", 
+          "triggers"
         ], 
         "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
         "properties": {
@@ -34763,8 +34763,8 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "host", 
-          "to"
+          "to", 
+          "host"
         ], 
         "properties": {
           "uid": {
