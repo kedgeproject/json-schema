@@ -20823,11 +20823,11 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "replicas", 
-          "test", 
           "containers", 
           "strategy", 
-          "triggers"
+          "triggers", 
+          "replicas", 
+          "test"
         ], 
         "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
         "properties": {
@@ -31421,9 +31421,9 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "triggers", 
           "strategy", 
-          "nodeSelector"
+          "nodeSelector", 
+          "triggers"
         ], 
         "description": "BuildConfigSpecMod defines OpenShift BuildConfig object", 
         "properties": {
@@ -34763,8 +34763,8 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "to", 
-          "host"
+          "host", 
+          "to"
         ], 
         "properties": {
           "uid": {
