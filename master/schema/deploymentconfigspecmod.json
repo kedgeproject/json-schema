@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/schema#", 
   "required": [
+    "replicas", 
     "test", 
     "containers", 
     "strategy", 
-    "triggers", 
-    "replicas"
+    "triggers"
   ], 
   "type": "object", 
   "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
