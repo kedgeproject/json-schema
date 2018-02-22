@@ -1801,21 +1801,25 @@
       ], 
       "description": "ServicePortMod is used to define Kubernetes service's port", 
       "properties": {
-        "endpoint": {
+        "routeEndpoint": {
           "type": "string", 
-          "description": "Host to create ingress automatically. Endpoint allows specifying an ingress resource in the format '<Host>/<Path>'"
+          "description": "Host to create routes automatically. RouteEndpoint allows specifying an route resource in the format URL or simply boolean."
         }, 
-        "targetPort": {
-          "description": "Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service", 
-          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
+        "protocol": {
+          "type": "string", 
+          "description": "The IP protocol for this port. Supports \"TCP\" and \"UDP\". Default is TCP."
         }, 
         "name": {
           "type": "string", 
           "description": "The name of this port within the service. This must be a DNS_LABEL. All ports within a ServiceSpec must have unique names. This maps to the 'Name' field in EndpointPort objects. Optional if only one ServicePort is defined on this service."
         }, 
-        "protocol": {
+        "ingressEndpoint": {
           "type": "string", 
-          "description": "The IP protocol for this port. Supports \"TCP\" and \"UDP\". Default is TCP."
+          "description": "Host to create ingress automatically. IngressEndpoint allows specifying an ingress resource in the format '<Host>/<Path>'"
+        }, 
+        "targetPort": {
+          "description": "Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod's container ports. If this is not specified, the value of the 'port' field is used (an identity map). This field is ignored for services with clusterIP=None, and should be omitted or set equal to the 'port' field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service", 
+          "$ref": "#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString"
         }, 
         "port": {
           "type": "integer", 
@@ -16588,11 +16592,11 @@
     }, 
     "io.kedge.DeploymentConfigSpecMod": {
       "required": [
-        "strategy", 
         "triggers", 
         "replicas", 
         "test", 
-        "containers"
+        "containers", 
+        "strategy"
       ], 
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig", 
       "properties": {

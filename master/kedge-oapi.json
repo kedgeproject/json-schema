@@ -10879,11 +10879,11 @@
     "io.kedge.DeploymentConfigSpecMod": {
       "description": "Ochestrator: OpenShift DeploymentConfigSpecMod is Kedge's extension of OpenShift DeploymentConfig",
       "required": [
-        "strategy",
         "triggers",
         "replicas",
         "test",
-        "containers"
+        "containers",
+        "strategy"
       ],
       "properties": {
         "activeDeadlineSeconds": {
@@ -12062,8 +12062,8 @@
         "port"
       ],
       "properties": {
-        "endpoint": {
-          "description": "Host to create ingress automatically. Endpoint allows specifying an ingress resource in the format '\u003cHost\u003e/\u003cPath\u003e'",
+        "ingressEndpoint": {
+          "description": "Host to create ingress automatically. IngressEndpoint allows specifying an ingress resource in the format '\u003cHost\u003e/\u003cPath\u003e'",
           "type": "string"
         },
         "name": {
@@ -12082,6 +12082,10 @@
         },
         "protocol": {
           "description": "The IP protocol for this port. Supports \"TCP\" and \"UDP\". Default is TCP.",
+          "type": "string"
+        },
+        "routeEndpoint": {
+          "description": "Host to create routes automatically. RouteEndpoint allows specifying an route resource in the format URL or simply boolean.",
           "type": "string"
         },
         "targetPort": {
