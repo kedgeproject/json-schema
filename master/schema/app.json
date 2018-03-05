@@ -34770,8 +34770,8 @@
       "items": {
         "additionalProperties": false, 
         "required": [
-          "to", 
-          "host"
+          "host", 
+          "to"
         ], 
         "properties": {
           "uid": {

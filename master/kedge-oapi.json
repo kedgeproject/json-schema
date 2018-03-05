@@ -11821,8 +11821,8 @@
     },
     "io.kedge.RouteSpec": {
       "required": [
-        "to",
-        "host"
+        "host",
+        "to"
       ],
       "properties": {
         "alternateBackends": {
@@ -19854,7 +19854,7 @@
   },
   "info": {
     "title": "Kubernetes",
-    "version": "v1.7.13"
+    "version": "v1.7.14"
   },
   "paths": {
     "/api/": {
