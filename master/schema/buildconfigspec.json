@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/schema#", 
   "required": [
-    "strategy", 
     "nodeSelector", 
-    "triggers"
+    "triggers", 
+    "strategy"
   ], 
   "type": "object", 
   "description": "BuildConfigSpecMod defines OpenShift BuildConfig object", 

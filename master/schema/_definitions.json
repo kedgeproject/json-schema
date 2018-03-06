@@ -10937,8 +10937,8 @@
     }, 
     "io.kedge.RouteSpec": {
       "required": [
-        "to", 
-        "host"
+        "host", 
+        "to"
       ], 
       "properties": {
         "tls": {
@@ -18627,9 +18627,9 @@
     }, 
     "io.kedge.BuildConfigSpec": {
       "required": [
-        "strategy", 
         "nodeSelector", 
-        "triggers"
+        "triggers", 
+        "strategy"
       ], 
       "description": "BuildConfigSpecMod defines OpenShift BuildConfig object", 
       "properties": {

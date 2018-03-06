@@ -10509,9 +10509,9 @@
     "io.kedge.BuildConfigSpec": {
       "description": "BuildConfigSpecMod defines OpenShift BuildConfig object",
       "required": [
-        "strategy",
         "nodeSelector",
-        "triggers"
+        "triggers",
+        "strategy"
       ],
       "properties": {
         "annotations": {
@@ -11821,8 +11821,8 @@
     },
     "io.kedge.RouteSpec": {
       "required": [
-        "to",
-        "host"
+        "host",
+        "to"
       ],
       "properties": {
         "alternateBackends": {
